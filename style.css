@@ -1,0 +1,153 @@
+/* =========================================
+   1. RESET & BASE
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px; /* Jarak dari atas layar */
+  min-height: 100vh;
+}
+
+/* =========================================
+   2. DATEPICKER WRAPPER
+   ========================================= */
+.datepicker-wrapper {
+  position: relative; /* Menjadi jangkar bagi popup kalender */
+  width: 320px;
+}
+
+/* =========================================
+   3. INPUT FIELD & ICON BUTTON
+   ========================================= */
+.input-group {
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.input-group input {
+  flex: 1;
+  border: none;
+  padding: 14px 16px;
+  font-size: 1rem;
+  color: #334155;
+  outline: none;
+  cursor: pointer;
+}
+
+.icon-btn {
+  background-color: #f8fafc;
+  border: none;
+  border-left: 1px solid #cbd5e1;
+  padding: 0 16px;
+  cursor: pointer;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+/* =========================================
+   4. CALENDAR POPUP (ABSOLUTE)
+   ========================================= */
+.calendar-popup {
+  position: absolute;
+  top: calc(100% + 10px); /* Muncul tepat di bawah input dengan jarak 10px */
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  z-index: 10; /* Memastikan kalender berada di atas elemen lain */
+}
+
+/* =========================================
+   5. CALENDAR HEADER
+   ========================================= */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #0f172a;
+  font-size: 1.05rem;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #94a3b8;
+  line-height: 0.5;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.nav-btn:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+/* =========================================
+   6. CALENDAR GRID (CSS GRID MAGIC)
+   ========================================= */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 Kolom sama besar */
+  text-align: center;
+  gap: 5px;
+}
+
+.days-header span {
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.85rem;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.dates span {
+  padding: 8px 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+/* Hover effect kecuali untuk hari yang kosong */
+.dates span:not(.empty):hover {
+  background-color: #f1f5f9;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* State saat tanggal dipilih */
+.dates span.selected {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+}
